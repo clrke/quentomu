@@ -32,18 +32,17 @@ def rcvMessage():
 	timestamp = ''
 	msg =''
 	mobile_number = ''
-	payload = {
-				'message_type' : msgType ,
+	payload = {		'message_type' : msgType ,
+				'mobile_number' : mobile_number,
 				'message' : msg,
-				 'mobile_number' : mobile_number,
+				'secret_key' : secretKy,
 				 'shortcode' : shortcode ,
-				'shortcode':shortcode,
 				'message_id':msgID,
 				'client_id' : clientId,
 				'request_id' : rqID,
 				'timestamp': timestamp
-				}
-	r  = rq.post('https://post.chikka.com/smsapi/request',data = payload)
+		}
+	r  = rq.get('https://post.chikka.com/smsapi/request',data = payload)
 	print (r.text)
 	print(r.url)
 	if(r):
