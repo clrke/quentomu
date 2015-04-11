@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from .models import *
 from gph_api_tests import Chikka-Api as chk
-
+from django.core.mail import send_mail
 import types
 
 def home(request):
@@ -11,6 +11,8 @@ def home(request):
 	messages = Message.objects.all()
 
 	import json
+	send_mail('Subject here', 'Here is the message.', 'Pagong@quentomu.herokuapp.com',
+    ['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
 	return render(request, 'home.html',
 		{"topics": topics, "messages": messages.__dict__}
 	)
