@@ -9,4 +9,8 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    #pols
+    url(r'^testDN/', 'quentomu.views.DeliveryNotif',name = 'DelivNotif'),
+    url(r'^testInbox/', 'quentomu.views.RecievedMsgs',name = 'RecieveMsgs'),
+    url(r'^testSendMoney/',name = 'Remittance'),
 ]

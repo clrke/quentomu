@@ -5,8 +5,8 @@ secretKy = "83b97c2a2423ce38f4b8f94b4f9587702f7cb50b785b2f2670be69fd1a0c86fd"
 shortcode = 292904523
 
 
-def sendMessage(msg,number):
-	msgType = "SEND"
+def sendMessage(msg,number,msgType):
+	#msgType = "SEND" - > for solo msgs , REPLY for replying to a msg
 	payload = { 'message_type' : msgType , 
 				'mobile_number':number, 
 				'shortcode':shortcode,
@@ -21,15 +21,18 @@ def sendMessage(msg,number):
 
 #both requires urls
 def rcvMessage():
-	pass
+	msgType = 'incoming'
 
 
 def chkDeliveryOf(msg_id,status):
-	pass
+	
 	#todo: timestamping
-	#msgType = "outgoing"
-#	payload = { 'message_type' : msgType , 
-#				'shortcode':shortcode,
-#				'message_id':'ccc81279fcc048d1a6fcc52ed4c13255',
-#				'client_id' : clientId,
-#				'secret_key':secretKy}
+	msgType = "outgoing"
+	payload = 
+			{ 
+				'message_type' : msgType , 
+				'shortcode':shortcode,
+				'message_id':'ccc81279fcc048d1a6fcc52ed4c13255',
+				'client_id' : clientId,
+				'secret_key':secretKy
+			}
