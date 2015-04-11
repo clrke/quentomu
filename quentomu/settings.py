@@ -25,7 +25,7 @@ SECRET_KEY = '$8wlzbg*cz2k_818d+%1b_15m=0xj!=w1%4t&h2(%3r9&9k3&+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -102,3 +102,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# On production
+if os.environ['DJANGO_ENVIRONMENT'] == 'production':
+    import dj_database_url
+    DATABASES['default'] =  dj_database_url.config()
+
+    DEBUG = (os.environ['DEBUG'] == 'yes') if 'DEBUG' in os.environ else False
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
