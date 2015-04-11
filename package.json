@@ -14,5 +14,8 @@
   "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/pup-progguild/quentomu/issues"
+  },
+  "dependencies": {
+    "angular": "~1.3.15"
   }
 }
