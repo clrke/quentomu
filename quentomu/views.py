@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import *
-from quentomu.gph_api_tests import Chikka_Api as chk
+from apis.gph_api_tests import Chikka_Api as chk
 import requests as rq
 from django.core.mail import send_mail
 import types
