@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html>
+<html ng-app="QuentomuApp">
 <head>
 	<title>Quentomu</title>
 	<link rel="stylesheet" type="text/css"
@@ -16,8 +16,9 @@
 	<div class="panel white">
 		Quentomu
 	</div>
-	<div class="row">
+	<div class="row" ng-controller="TopicsCtrl as Topic">
 		<h1> Stories </h1>
+		{[ Message.values ]}
 		<div class="small-4 column">
 			<div class="panel white">
 				<h4> Computer Science </h4>
@@ -63,64 +64,26 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel white">
+	<div class="panel white" ng-controller="ConversationsCtrl as Conversation">
 		<div class="row">
 			<h1>Messages</h1>
-			<div class="medium-4 column">
-				<div class="panel callout">
-				 	Clarke Benedict Plumo
-				 	<span class="alert round label">
-				 		4
-				 	</span>
-				</div>
-			</div>
-			<div class="medium-4 column">
-				<div class="panel">
-				 	Paul Justin Aranzamendez
-				</div>
-			</div>
-			<div class="medium-4 column">
-				<div class="panel callout">
-				 	Jonathan Doydora
-				 	<span class="alert round label">
-				 		46
-				 	</span>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="small-4 column">
-				<div class="panel white">
-					<b> My Son [(+63)9250328895] </b>
-					<div class="chat"> hello world </div>
-					<div class="text reply">
-						hi how are ya?
+			<div class="small-4 column"
+				ng-repeat="conversation in Conversation.values">
+				<div class="panel white chatbox">
+					<b> {[ conversation.friend.username ]} </b>
+					<div class="chat"
+						ng-repeat="message in conversation.messages"
+						ng-class="{reply: ! message.you}">
+						{[ message.content ]}
 					</div>
-					<input type="text"/>
-				</div>
-			</div>
-			<div class="small-4 column">
-				<div class="panel white">
-					<b> Prince John Lansang </b>
-					<div class="chat"> hello world </div>
-					<div class="chat reply">
-						hi how are ya?
-					</div>
-					<input type="text"/>
-				</div>
-			</div>
-			<div class="small-4 column">
-				<div class="panel white">
-					<b> Mark Jayson Fuentes </b>
-					<div class="chat"> tapos na kayo? </div>
-					<div class="chat reply">
-						yes
-					</div>
-					<input type="text"/>
-				</div>
-			</div>
-		</div>
+					<form ng-submit="Conversation.send(conversation)">
 
+						<input type="text" ng-model="conversation.reply"/>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
+	<script type="text/javascript" src="{% static 'quentomu.js' %}"></script>
 </body>
 </html>

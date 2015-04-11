@@ -17,3 +17,10 @@
 .reply {
 	text-align: right;
 }
+
+.chatbox {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	height: 300px;
+	white-space:nowrap
+}
