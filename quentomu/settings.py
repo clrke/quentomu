@@ -107,6 +107,7 @@ STATIC_URL = '/static/'
 if os.environ['DJANGO_ENVIRONMENT'] == 'production':
     import dj_database_url
     DATABASES['default'] =  dj_database_url.config()
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
     DEBUG = (os.environ['DEBUG'] == 'yes') if 'DEBUG' in os.environ else False
 
