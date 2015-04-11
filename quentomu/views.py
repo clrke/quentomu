@@ -6,7 +6,9 @@ from gph_api_tests import Chikka_Api as chk
 import requests as rq
 from django.core.mail import send_mail
 import types
-global content = ''
+
+global content 
+content = ''
 def home(request):
 	topics = Topic.objects.all()
 	messages = Message.objects.all()
