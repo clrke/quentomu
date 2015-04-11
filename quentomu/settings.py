@@ -110,7 +110,7 @@ if os.environ['DJANGO_ENVIRONMENT'] == 'production':
     DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_HOST_USER = 'pjinxed.aranzaellej@gmail.com'
-    EMAIL_HOST_PASSWORD = 'rqybnksjmimwwyyp)'
+    EMAIL_HOST_PASSWORD = 'rqybnksjmimwwyyp'
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     DEBUG = (os.environ['DEBUG'] == 'yes') if 'DEBUG' in os.environ else False
