@@ -30,23 +30,22 @@ def rcvMessage():
 	msgType = 'incoming'
 	msgID = ''
 	timestamp = ''
-	payload = 
-			{
+	payload = {
 				'message_type' : msgType , 
 				'shortcode':shortcode,
 				'message_id':msgID,
 				'client_id' : clientId,
-				'request_id' : rqID
+				'request_id' : rqID,
 				'timestamp': timestamp
-			}
-	r  = rq.get('https://post.chikka.com/smsapi/request',data = payload)
+                        }
+	r  = rq.post('https://post.chikka.com/smsapi/request',data = payload)
 	print (r.text)
 	print(r.url)
 	if(r):
 		payload = {'Status' : 'Accepted'}
 		print("accepted")
 		r = rq.post('https://post.chikka.com/smsapi/request')
-	else
+	else:
 		payload = {'Status' : 'Error'}
 		print("Error")
 		r = rq.post('https://post.chikka.com/smsapi/request')
@@ -57,22 +56,21 @@ def chkDeliveryOf():
 	
 	#todo: timestamping
 	msgType = "outgoing"
-	payload = 
-			{ 
+	payload = { 
 				'message_type' : msgType , 
 				'shortcode':shortcode,
 				'message_id':msgID,
 				'client_id' : clientId,
 				'secret_key':secretKy
 			}
-	r = rq.get('https://post.chikka.com/smsapi/request',data = payload)
+	r = rq.post('https://post.chikka.com/smsapi/request',data = payload)
 	print(r.text)
 	print(r.url)
 	if(r):
 		payload = {'Status' : 'Accepted'}
 		print("accepted")
 		r = rq.post('https://post.chikka.com/smsapi/request')
-	else
+	else:
 		payload = {'Status' : 'Error'}
 		print("Error")
 		r = rq.post('https://post.chikka.com/smsapi/request')
