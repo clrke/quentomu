@@ -11,7 +11,7 @@ def home(request):
 	messages = Message.objects.all()
 
 	import json
-	send_mail('Subject here', 'Here is the message.', 'Pagong@quentomu.herokuapp.com',
+	send_mail('Subject here', 'Here is the message.', 'pjinxed.aranzaellej@gmail.com',
     ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	return render(request, 'home.html',
 		{"topics": topics, "messages": messages.__dict__}
