@@ -23,6 +23,7 @@ def sendMessage(msg,number,msgType,msgID):
 	print(r.url)
 	print(r.status_code)
 	print(r.text)
+	return r
 
 
 #both requires urls
@@ -32,7 +33,8 @@ def rcvMessage():
 	timestamp = ''
 	msg =''
 	mobile_number = ''
-	payload = {		'message_type' : msgType ,
+	payload = {	
+				'message_type' : msgType ,
 				'mobile_number' : mobile_number,
 				'message' : msg,
 				'secret_key' : secretKy,
@@ -53,6 +55,7 @@ def rcvMessage():
 		payload = {'Status' : 'Error'}
 		print("Error")
 		r = rq.post('https://post.chikka.com/smsapi/request')
+	return r
 
 
 
@@ -78,3 +81,4 @@ def chkDeliveryOf():
 		payload = {'Status' : 'Error'}
 		print("Error")
 		r = rq.post('https://post.chikka.com/smsapi/request')
+	return r

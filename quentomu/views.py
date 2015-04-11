@@ -2,16 +2,20 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import *
-#from gph_api_tests import Chikka-Api as chk
+from gph_api_tests import Chikka_Api as chk
+import requests as rq
 from django.core.mail import send_mail
 import types
-
+global content = ''
 def home(request):
 	topics = Topic.objects.all()
 	messages = Message.objects.all()
 
 	import json
-	send_mail('Subject here', 'Here is the message.', 'pagong@quentomu.herokuapp.com',
+	r = chk.sendMessage('dude','09161172935','SEND', 'this')
+	global content = "I sent a message "+ r.text + " "+ r.status_code
+
+	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
     ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	return render(request, 'home.html',
 		{"topics": topics, "messages": messages.__dict__}
@@ -20,9 +24,11 @@ def home(request):
 def Remittance(request):
 	pass
 def DelivNotif(request):
-	pass
+	r = chk.chkDeliveryOf()
+	global content = "Delivery notification: "+r.text+" "+r.status_code
 def ReceiveMsgs(request):
-	pass
+	r = chk.rcvMessage()
+	global content = "Message Recieved "+r.text+" "+r.status_code
 
 def conversation(request):
 	if request.method == 'POST':
