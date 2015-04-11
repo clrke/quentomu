@@ -1,4 +1,5 @@
 django == 1.8
+requests
 dj-static
 dj-database-url
 psycopg2
