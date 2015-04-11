@@ -15,7 +15,8 @@ def home(request):
 
 	import json
 	r = chk.sendMessage('dude','09161172935','SEND', 'this')
-	global content = "I sent a message "+ r.text + " "+ r.status_code
+	global content 
+	content = "I sent a message "+ r.text + " "+ r.status_code
 
 	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
     ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
@@ -27,10 +28,12 @@ def Remittance(request):
 	pass
 def DelivNotif(request):
 	r = chk.chkDeliveryOf()
-	global content = "Delivery notification: "+r.text+" "+r.status_code
+	global content
+	content = "Delivery notification: "+r.text+" "+r.status_code
 def ReceiveMsgs(request):
 	r = chk.rcvMessage()
-	global content = "Message Recieved "+r.text+" "+r.status_code
+	global content
+	content = "Message Recieved "+r.text+" "+r.status_code
 
 def conversation(request):
 	if request.method == 'POST':
