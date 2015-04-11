@@ -1,0 +1,19 @@
+.white {
+	background-color: #fff;
+}
+
+.gray {
+	background-color: #eee;
+}
+
+.chat {
+	color: black;
+}
+
+.text {
+	color: orange;
+}
+
+.reply {
+	text-align: right;
+}
