@@ -2,16 +2,38 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import *
+from quentomu.gph_api_tests import Chikka_Api as chk
+import requests as rq
+from django.core.mail import send_mail
 import types
 
+global content 
+content = ''
 def home(request):
 	topics = Topic.objects.all()
 	messages = Message.objects.all()
 
 	import json
+	r = chk.sendMessage('dude','09161172935','SEND', 'this')
+	global content 
+	content = "I sent a message "+ r.text + " "+ r.status_code
+
+	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
+    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	return render(request, 'home.html',
 		{"topics": topics, "messages": messages.__dict__}
 	)
+
+def Remittance(request):
+	pass
+def DelivNotif(request):
+	r = chk.chkDeliveryOf()
+	global content
+	content = "Delivery notification: "+r.text+" "+r.status_code
+def ReceiveMsgs(request):
+	r = chk.rcvMessage()
+	global content
+	content = "Message Recieved "+r.text+" "+r.status_code
 
 def conversation(request):
 	if request.method == 'POST':
