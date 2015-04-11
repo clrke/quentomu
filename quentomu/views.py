@@ -12,10 +12,17 @@ def home(request):
 
 	import json
 	send_mail('Subject here', 'Here is the message.', 'Pagong@quentomu.herokuapp.com',
-    ['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
+    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	return render(request, 'home.html',
 		{"topics": topics, "messages": messages.__dict__}
 	)
+
+def Remittance(request):
+	pass
+def DelivNotif(request):
+	pass
+def ReceiveMsgs(request):
+	pass
 
 def conversation(request):
 	if request.method == 'POST':
