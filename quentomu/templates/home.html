@@ -46,7 +46,7 @@
 			</h1>
 			<div class="small-4 column"
 				ng-repeat="conversation in Conversation.values">
-				<div class="panel white chatbox">
+				<div class="panel white chatbox no-margin">
 					<b>
 						{[ Conversation.getFriendName(conversation.friend)]}
 						<small ng-if="conversation.distance"
@@ -59,11 +59,10 @@
 						ng-class="{reply: ! message.you}">
 						{[ message.content ]}
 					</div>
-					<form ng-submit="Conversation.send(conversation)">
-
-						<input type="text" ng-model="conversation.reply"/>
-					</form>
 				</div>
+				<form ng-submit="Conversation.send(conversation)">
+					<input class="no-margin" type="text" ng-model="conversation.reply"/>
+				</form>
 			</div>
 		</div>
 	</div>
