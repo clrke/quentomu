@@ -37,3 +37,7 @@ body {
 .logo {
 	height: 40px;
 }
+
+.small-padding {
+	padding: 10px;
+}
