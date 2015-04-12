@@ -9,8 +9,8 @@ rqCost = 'FREE'
 
 def sendMessage(msg,number,msgType,msgID,rqID):
 	#msgType = "SEND" - > for solo msgs , REPLY for replying to a msg
-	payload = { 'message_type' : msgType , 
-				'mobile_number':number, 
+	payload = { 'message_type' : msgType ,
+				'mobile_number':number,
 				'shortcode':shortcode,
 				'message_id':msgID,
 				'message' :msg,'client_id' : clientId,
@@ -33,7 +33,7 @@ def rcvMessage():
 	timestamp = ''
 	msg =''
 	mobile_number = ''
-	payload = {	
+	payload = {
 				'message_type' : msgType ,
 				'mobile_number' : mobile_number,
 				'message' : msg,
@@ -60,16 +60,16 @@ def rcvMessage():
 
 
 def chkDeliveryOf():
-	
+
 	#todo: timestamping
 	msgType = "outgoing"
 	msgID = ''
 	number = ''
 	status = ''
-	timestamp = '' 
+	timestamp = ''
 	credits_cost = ''
-	payload = { 
-				'message_type' : msgType , 
+	payload = {
+				'message_type' : msgType ,
 				'shortcode':shortcode,
 				'message_id':msgID,
 				'status': status,
@@ -77,14 +77,13 @@ def chkDeliveryOf():
 				'credits_cost': credits_cost,
 			}
 	r = rq.post('https://post.chikka.com/smsapi/request',data = payload)
-	print(r.text)
-	print(r.url)
+	data = r
 	if(r):
 		payload = {'Status' : 'Accepted'}
-		
+
 		r = rq.post('https://post.chikka.com/smsapi/request' , data = payload)
 	else:
 		payload = {'Status' : 'Error'}
-		
+
 		r = rq.post('https://post.chikka.com/smsapi/request' , data = payload)
-	return r
+	return data
