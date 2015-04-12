@@ -70,7 +70,7 @@ def chkDeliveryOf():
 				'shortcode':shortcode,
 				'message_id':msgID,
 				'status': status,
-				'timestamp' timestamp,
+				'timestamp' : timestamp,
 				'credits_cost': credits_cost,
 
 			}
