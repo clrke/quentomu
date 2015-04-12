@@ -81,10 +81,10 @@ def chkDeliveryOf():
 	print(r.url)
 	if(r):
 		payload = {'Status' : 'Accepted'}
-		print("accepted")
-		r = rq.post('https://post.chikka.com/smsapi/request')
+		
+		r = rq.post('https://post.chikka.com/smsapi/request' , data = payload)
 	else:
 		payload = {'Status' : 'Error'}
-		print("Error")
-		r = rq.post('https://post.chikka.com/smsapi/request')
+		
+		r = rq.post('https://post.chikka.com/smsapi/request' , data = payload)
 	return r

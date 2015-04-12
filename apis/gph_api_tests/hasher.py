@@ -1,4 +1,4 @@
 
 
 def hashme(hashthis):
-	return hash(hashthis)
+	return abs(hash(hashthis))
