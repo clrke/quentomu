@@ -48,12 +48,18 @@ def conversation(request):
 	if request.method == 'POST':
 		POST = json.loads(request.body.decode("utf-8"))
 
-		print (User.objects.get(id=POST['friend_id']))
+		if type(POST['friend_id']) is str:
+			receiver = User.objects.get(id=1)
+			contact_number = POST['friend_id']
+		else:
+			receiver = User.objects.get(id=POST['friend_id'])
+			contact_number=''
 
 		Message(
 			sender=request.user,
-			receiver=User.objects.get(id=POST['friend_id']),
-			content=POST['reply']
+			receiver=receiver,
+			content=POST['reply'],
+			contact_number=contact_number
 		).save()
 
 		return JsonResponse({"successful": True})
