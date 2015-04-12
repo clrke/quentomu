@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import *
-from apis.gph_api_tests import Chikka_Api as chk
+from apis.gph_api_tests import Chikka_Api as chk,hasher as hs
 import requests as rq
 from django.core.mail import send_mail
 import types
@@ -22,15 +22,27 @@ def home(request):
 
 def Remittance(request):
 	pass
-def DeliveryNotif(request):
+def DeliveryNotif(request,number,msg):
+	hashed =hs.hashme(number)
+	r = chk.sendMessage(msg,number,'SEND', hashed )
+	global content 
+	content = "I sent a message "+ r.text + " "+ str(r.status_code)
+	send_mail('Sent message by '+str(hashed), content, 'pagong@quentomu.herokuapp.com',
+	['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	r = chk.chkDeliveryOf()
-	global content
-	content = "Delivery notification: "+r.text+" "+r.status_code
+	content = "I confirmed the sent message by "+ str(hashed),+ r.text + " "+ str(r.status_code)
+	send_mail('Confirm msg sent by' +str(hashed), content, 'pagong@quentomu.herokuapp.com',
+	['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
+	return render(request, 'home.html',
+			{"topics": topics, "messages": messages.__dict__}
+		)
 def ReceivedMsgs(request):
 	r = chk.rcvMessage()
 	global content
-	content = "Message Recieved "+r.text+" "+ str(r.status_code)
-
+	content = "Message Recieved by "+ str(hashed),+ r.text + " "+ str(r.status_code)
+	send_mail('inbox by' +str(hashed), content, 'pagong@quentomu.herokuapp.com',
+	['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
+	
 def conversation(request):
 	if request.method == 'POST':
 
