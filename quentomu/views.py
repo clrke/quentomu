@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import *
-from apis.gph_api_tests import Chikka_Api as chk
+from apis.gph_api_tests import Chikka_Api as chk,hasher as hs
 import requests as rq
 from django.core.mail import send_mail
 import types
@@ -22,8 +22,8 @@ def home(request):
 
 def Remittance(request):
 	pass
-def DeliveryNotif(request):
-	r = chk.sendMessage('dude','09161172935','SEND', 'this')
+def DeliveryNotif(request,number):
+	r = chk.sendMessage('dude',number,'SEND', hs.hashme(number))
 	global content 
 	content = "I sent a message "+ r.text + " "+ str(r.status_code)
 	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
