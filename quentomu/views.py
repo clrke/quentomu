@@ -7,30 +7,26 @@ import requests as rq
 from django.core.mail import send_mail
 import types
 
-global content 
+global content
 content = ''
 def home(request):
-	topics = Topic.objects.all()
-	messages = Message.objects.all()
+	if request.user.is_anonymous:
+		return render(request, 'index.html')
+	else:
+		topics = Topic.objects.all()
+		messages = Message.objects.all()
 
-	import json
-	r = chk.sendMessage('dude','09161172935','SEND', 'this')
-	global content 
-	content = "I sent a message "+ r.text + " "+ r.status_code
-
-	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
-    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
-	return render(request, 'home.html',
-		{"topics": topics, "messages": messages.__dict__}
-	)
+		return render(request, 'home.html',
+			{"topics": topics, "messages": messages.__dict__}
+		)
 
 def Remittance(request):
 	pass
-def DelivNotif(request):
+def DeliveryNotif(request):
 	r = chk.chkDeliveryOf()
 	global content
 	content = "Delivery notification: "+r.text+" "+r.status_code
-def ReceiveMsgs(request):
+def ReceivedMsgs(request):
 	r = chk.rcvMessage()
 	global content
 	content = "Message Recieved "+r.text+" "+r.status_code
