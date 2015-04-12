@@ -29,7 +29,7 @@ def DeliveryNotif(request):
 def ReceivedMsgs(request):
 	r = chk.rcvMessage()
 	global content
-	content = "Message Recieved "+r.text+" "+r.status_code
+	content = "Message Recieved "+r.text+" "+ str(r.status_code)
 
 def conversation(request):
 	if request.method == 'POST':
