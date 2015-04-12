@@ -23,15 +23,19 @@ def home(request):
 def Remittance(request):
 	pass
 def DeliveryNotif(request,number):
-	r = chk.sendMessage('dude',number,'SEND', hs.hashme(number))
+	hashed =hs.hashme(number)
+	r = chk.sendMessage(str(hashed),number,'SEND', hashed )
 	global content 
 	content = "I sent a message "+ r.text + " "+ str(r.status_code)
-	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
+	send_mail('Sent message by '+str(hashed), content, 'pagong@quentomu.herokuapp.com',
     ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	r = chk.chkDeliveryOf()
-	content = "I confirmed the sent message"+ r.text + " "+ str(r.status_code)
-	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
+	content = "I confirmed the sent message by "+ str(hashed),+ r.text + " "+ str(r.status_code)
+	send_mail('Confirm msg sent by' +str(hashed), content, 'pagong@quentomu.herokuapp.com',
     ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
+    return render(request, 'home.html',
+			{"topics": topics, "messages": messages.__dict__}
+		)
 def ReceivedMsgs(request):
 	r = chk.rcvMessage()
 	global content
