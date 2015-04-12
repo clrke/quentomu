@@ -64,12 +64,15 @@ def chkDeliveryOf():
 	#todo: timestamping
 	msgType = "outgoing"
 	msgID = ''
+	number = ''
 	payload = { 
 				'message_type' : msgType , 
 				'shortcode':shortcode,
 				'message_id':msgID,
-				'client_id' : clientId,
-				'secret_key':secretKy
+				'status': status,
+				'timestamp' timestamp,
+				'credits_cost': credits_cost,
+
 			}
 	r = rq.post('https://post.chikka.com/smsapi/request',data = payload)
 	print(r.text)
