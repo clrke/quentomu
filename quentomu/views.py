@@ -10,7 +10,7 @@ import types
 global content
 content = ''
 def home(request):
-	if request.user.is_anonymous:
+	if request.user.is_anonymous():
 		return render(request, 'index.html')
 	else:
 		topics = Topic.objects.all()
