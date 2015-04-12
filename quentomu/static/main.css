@@ -2,6 +2,11 @@
 	background-color: #fff;
 }
 
+.quentomu-color {
+	background-color: #003;
+	font-size: 22px;
+}
+
 .gray {
 	background-color: #eee;
 }
@@ -27,4 +32,8 @@
 
 .no-margin {
 	margin: 0px;
+}
+
+.logo {
+	height: 40px;
 }
