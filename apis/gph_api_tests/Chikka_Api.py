@@ -65,6 +65,9 @@ def chkDeliveryOf():
 	msgType = "outgoing"
 	msgID = ''
 	number = ''
+	status = ''
+	timestamp = '' 
+	credits_cost = ''
 	payload = { 
 				'message_type' : msgType , 
 				'shortcode':shortcode,
@@ -72,7 +75,6 @@ def chkDeliveryOf():
 				'status': status,
 				'timestamp' : timestamp,
 				'credits_cost': credits_cost,
-
 			}
 	r = rq.post('https://post.chikka.com/smsapi/request',data = payload)
 	print(r.text)
