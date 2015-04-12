@@ -28,12 +28,12 @@ def DeliveryNotif(request,number):
 	global content 
 	content = "I sent a message "+ r.text + " "+ str(r.status_code)
 	send_mail('Sent message by '+str(hashed), content, 'pagong@quentomu.herokuapp.com',
-    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
+	['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	r = chk.chkDeliveryOf()
 	content = "I confirmed the sent message by "+ str(hashed),+ r.text + " "+ str(r.status_code)
 	send_mail('Confirm msg sent by' +str(hashed), content, 'pagong@quentomu.herokuapp.com',
-    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
-    return render(request, 'home.html',
+	['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
+	return render(request, 'home.html',
 			{"topics": topics, "messages": messages.__dict__}
 		)
 def ReceivedMsgs(request):
