@@ -40,6 +40,7 @@ def DeliveryNotif_reply(request, number,reqID,msg):
 	send_mail('Sent message by '+str(hashed), content, 'pagong@quentomu.herokuapp.com',
 	['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	return HttpResponse('successful')
+
 def DN(request):
 	r = chk.chkDeliveryOf()
 	content = "I confirmed the sent message by "+ str(hashed)+ r.text + " "+ str(r.status_code)
