@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^topics/reply/(?P<id>\d+)$', 'quentomu.views.topics_reply',
     	name='topics_reply'),
 
+    url(r'^distance/(?P<user1_id>\d+)/(?P<user2_id>\d+)', 'quentomu.views.distance',
+    	name='distance'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),

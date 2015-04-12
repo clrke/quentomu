@@ -7,6 +7,7 @@ import requests as rq
 from django.core.mail import send_mail
 import types
 import json
+from apis.gph_api_tests import Here as here
 
 global content
 content = ''
@@ -166,3 +167,21 @@ def topics_reply(request, id):
 		post = Post.objects.get(id=id)
 
 		return render(request, 'topics/reply.html', {"post": post})
+
+def distance(request, user1_id, user2_id):
+	user1 = User.objects.get(id=user1_id)
+	user2 = User.objects.get(id=user2_id)
+
+	address1 = user1.address.value
+	address2 = user2.address.value
+
+	geocode1 = here.geocode_search(address1)
+	geocode2 = here.geocode_search(address2)
+
+	distance = here.geo_carroute(geocode1, geocode2)
+
+	return JsonResponse({
+		"addresses": [address1, address2],
+		"geocode": [geocode1, geocode2],
+		"distance": distance,
+	}, safe=False)
