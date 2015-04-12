@@ -18,7 +18,10 @@
 	</div>
 	<div class="row" ng-controller="TopicsCtrl as Topic">
 		<h1> Stories </h1>
-		<div class="small-4 column" ng-repeat="topic in Topic.values">
+		<input type="search" class="searchbox"
+			ng-model="Topic.search" placeholder="Search"/>
+		<div class="small-4 column"
+			ng-repeat="topic in Topic.values|filter:Topic.search">
 			<div class="panel white">
 				<h4>
 					<a href="/topics/{[ topic.id ]}">
