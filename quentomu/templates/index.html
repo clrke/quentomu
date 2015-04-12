@@ -27,7 +27,7 @@
 				position:center;
 			}
 			img{
-				background: url({% static 'quentomu-logo.png' %});
+				background: url();
 				width: 1050;
 				height: 280;
 				position:relative;
@@ -59,12 +59,11 @@
 	</head>
 	<body>
 		<div class="row">
-		<div class="small-4 column">
-			<a href="/admin/login?next=/" class="button">Login</a>
-		</div>
-		<div class="small-4 column">
-			<a href="/register" class="button">Register</a>
-		</div>
+			<img src="{% static 'quentomu-logo.png' %}">
+			<div class="small-6 column">
+				<a href="/admin/login?next=/" class="button success">Login</a>
+				<a href="/register" class="button">Register</a>
+			</div>
 		</div>
 	</body>
 
