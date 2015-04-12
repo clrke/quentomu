@@ -27,3 +27,10 @@ class Message(models.Model):
 
 	def __str__(self):
 		return "[%s to %s] %s"%(self.sender.id, self.receiver.id, self.content)
+
+class Address(models.Model):
+	value = models.TextField()
+	user = models.OneToOneField(User)
+
+	def __str__(self):
+		return self.value

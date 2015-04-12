@@ -15,3 +15,8 @@ class MessageAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Message, MessageAdmin)
+
+class AddressAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Address, AddressAdmin)
