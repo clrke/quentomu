@@ -28,7 +28,10 @@ def DeliveryNotif(request):
 	content = "I sent a message "+ r.text + " "+ str(r.status_code)
 	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
     ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
-
+	r = chk.chkDeliveryOf()
+	content = "I confirmed the sent message"+ r.text + " "+ str(r.status_code)
+	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
+    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 def ReceivedMsgs(request):
 	r = chk.rcvMessage()
 	global content
