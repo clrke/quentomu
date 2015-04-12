@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'^conversations$', 'quentomu.views.conversation', name='conversation'),
     url(r'^topics$', 'quentomu.views.topics', name='topics'),
 
+    url(r'^register$', 'quentomu.views.register', name='register'),
+
     url(r'^topics/(?P<id>\d+)$', 'quentomu.views.topics_show',
     	name='topics_show'),
     url(r'^topics/(?P<id>\d+)/create$', 'quentomu.views.topics_create',

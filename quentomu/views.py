@@ -22,6 +22,20 @@ def home(request):
 			{"topics": topics, "messages": messages.__dict__}
 		)
 
+def register(request):
+	if request.method == 'POST':
+		user = User.objects.create_user(
+			request.POST['username'],
+			request.POST['email'],
+			request.POST['password']
+		)
+
+		Address(value=request.POST['email'], user=user).save()
+
+		return redirect('/')
+	else:
+		return render(request, 'register.html')
+
 def Remittance(request):
 	pass
 def DeliveryNotif(request,number,msg):

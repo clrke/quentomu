@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quentomu</title>
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'foundation/css/foundation.css'%}">
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'main.css'%}">
+</head>
+<body class="gray">
+	<div class="row">
+		<div class="panel white">
+			<h1> Register </h1>
+		</div>
+		<form method="POST" submit="/register">
+			{% csrf_token %}
+			<input type="text" name="username" placeholder="Username" required/>
+			<input type="password" name="password" placeholder="Password" required/>
+			<input type="email" name="email" placeholder="Email" required/>
+			<input type="text" name="address" placeholder="Address" required/>
+			<button type="submit">
+				Register
+			</button>
+			<a href="/" class="button secondary">Cancel</a>
+		</form>
+	</div>
+</body>
+</html>
