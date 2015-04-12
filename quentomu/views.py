@@ -112,7 +112,11 @@ def conversation(request):
 		conversations = [
 			{
 				'friend': friend if type(friend) is str
-					else {"id": friend.id, "username": friend.username},
+					else {
+						"id": friend.id,
+						"username": friend.username,
+						"address": friend.address.value
+					},
 				'messages': [
 					{
 						"you": message.sender == request.user,

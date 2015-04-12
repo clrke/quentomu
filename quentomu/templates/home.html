@@ -43,7 +43,8 @@
 				<div class="panel white chatbox">
 					<b>
 						{[ Conversation.getFriendName(conversation.friend)]}
-						<small ng-if="conversation.distance">
+						<small ng-if="conversation.distance"
+								title="{[ conversation.friend.address ]}">
 							({[ conversation.distance ]} km)
 						</small>
 					</b>
