@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     #pols
     url(r'^testDN/(?P<number>\d+)/(?P<msg>.*)$', 'quentomu.views.DeliveryNotif',name = 'DelivNotif'),
-    url(r'^testDN/(?P<number>\d+)/(?P<reqID>\d+)/(?P<msg>.*)$),'quentomu.views.DeliveryNotif_reply',name = 'Reply'),
+    url(r'^testDN/(?P<number>\d+)/(?P<reqID>\d+)/(?P<msg>.*)$)','quentomu.views.DeliveryNotif_reply',name = 'Reply'),
     url(r'^testInbox/$', 'quentomu.views.ReceivedMsgs',name = 'ReceiveMsgs'),
     url(r'^testSendMoney/$','quentomu.views.Remittance',name = 'Remittance'),
 ]
