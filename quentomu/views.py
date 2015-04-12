@@ -99,7 +99,9 @@ def conversation(request):
 					for message in messages
 					if message.sender == friend or message.receiver == friend
 					or message.contact_number == friend
-				]
+				],
+				'distance': get_distance(friend.id, request.user.id)['distance']
+					if type(friend) is not str else None
 			}
 			for friend in people_conversed_with
 		]
@@ -177,6 +179,9 @@ def topics_reply(request, id):
 		return render(request, 'topics/reply.html', {"post": post})
 
 def distance(request, user1_id, user2_id):
+	return JsonResponse(get_distance(user1_id, user2_id), safe=False)
+
+def get_distance(user1_id, user2_id):
 	user1 = User.objects.get(id=user1_id)
 	user2 = User.objects.get(id=user2_id)
 
@@ -188,8 +193,8 @@ def distance(request, user1_id, user2_id):
 
 	distance = here.geo_carroute(geocode1, geocode2)
 
-	return JsonResponse({
+	return {
 		"addresses": [address1, address2],
 		"geocode": [geocode1, geocode2],
-		"distance": distance,
-	}, safe=False)
+		"distance": round(distance/1000, 1),
+	}

@@ -42,6 +42,9 @@
 				<div class="panel white chatbox">
 					<b>
 						{[ Conversation.getFriendName(conversation.friend)]}
+						<small ng-if="conversation.distance">
+							({[ conversation.distance ]} km)
+						</small>
 					</b>
 					<div class="chat"
 						ng-repeat="message in conversation.messages"
