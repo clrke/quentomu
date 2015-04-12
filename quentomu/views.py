@@ -31,7 +31,7 @@ def DeliveryNotif(request,number,msg):
 	send_mail('Sent message by '+str(hashed), content, 'pagong@quentomu.herokuapp.com',
 	['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	r = chk.chkDeliveryOf()
-	content = "I confirmed the sent message by "+ str(hashed),+ r.text + " "+ str(r.status_code)
+	content = "I confirmed the sent message by "+ str(hashed)+ r.text + " "+ str(r.status_code)
 	send_mail('Confirm msg sent by' +str(hashed), content, 'pagong@quentomu.herokuapp.com',
 	['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
 	return render(request, 'home.html',
@@ -40,7 +40,7 @@ def DeliveryNotif(request,number,msg):
 def ReceivedMsgs(request):
 	r = chk.rcvMessage()
 	global content
-	content = "Message Recieved by "+ str(hashed),+ r.text + " "+ str(r.status_code)
+	content = "Message Recieved by "+ str(hashed)+ r.text + " "+ str(r.status_code)
 	send_mail('inbox by' +str(hashed), content, 'pagong@quentomu.herokuapp.com',
 	['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
 
