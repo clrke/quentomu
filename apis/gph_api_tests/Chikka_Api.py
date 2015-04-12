@@ -63,6 +63,7 @@ def chkDeliveryOf():
 	
 	#todo: timestamping
 	msgType = "outgoing"
+	msgID = ''
 	payload = { 
 				'message_type' : msgType , 
 				'shortcode':shortcode,
