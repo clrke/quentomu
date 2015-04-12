@@ -26,10 +26,11 @@ angular.module('QuentomuApp', [])
 	Conversation.send = function (conversation) {
 		if(conversation.reply == '') return;
 
-		console.log($http.post);
-
 		$http.post('/conversations', {
-			"friend_id": conversation.friend.id,
+			"friend_id":
+				typeof conversation.friend == "string" ?
+					conversation.friend :
+					conversation.friend.id,
 			"reply": conversation.reply
 		});
 
@@ -38,5 +39,9 @@ angular.module('QuentomuApp', [])
 			content: conversation.reply
 		})
 		conversation.reply = '';
+	}
+
+	Conversation.getFriendName = function (friend) {
+		return typeof friend == "string" ? friend : friend.username
 	}
 }]);

@@ -39,7 +39,9 @@
 			<div class="small-4 column"
 				ng-repeat="conversation in Conversation.values">
 				<div class="panel white chatbox">
-					<b> {[ conversation.friend.username ]} </b>
+					<b>
+						{[ Conversation.getFriendName(conversation.friend)]}
+					</b>
 					<div class="chat"
 						ng-repeat="message in conversation.messages"
 						ng-class="{reply: ! message.you}">

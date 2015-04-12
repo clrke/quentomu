@@ -6,6 +6,7 @@ from apis.gph_api_tests import Chikka_Api as chk,hasher as hs
 import requests as rq
 from django.core.mail import send_mail
 import types
+import json
 
 global content
 content = ''
@@ -25,7 +26,7 @@ def Remittance(request):
 def DeliveryNotif(request,number,msg):
 	hashed =hs.hashme(number)
 	r = chk.sendMessage(msg,number,'SEND', hashed )
-	global content 
+	global content
 	content = "I sent a message "+ r.text + " "+ str(r.status_code)
 	send_mail('Sent message by '+str(hashed), content, 'pagong@quentomu.herokuapp.com',
 	['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
@@ -42,18 +43,17 @@ def ReceivedMsgs(request):
 	content = "Message Recieved by "+ str(hashed),+ r.text + " "+ str(r.status_code)
 	send_mail('inbox by' +str(hashed), content, 'pagong@quentomu.herokuapp.com',
 	['pjinxed.aranzaellej@gmail.com'], fail_silently=False)
-	
+
 def conversation(request):
 	if request.method == 'POST':
+		POST = json.loads(request.body.decode("utf-8"))
 
-		print(request.body)
-
-		print (User.objects.get(id=request.body['friend_id']))
+		print (User.objects.get(id=POST['friend_id']))
 
 		Message(
 			sender=request.user,
-			receiver=User.objects.get(id=request.body['friend_id'])[0],
-			content=request.body['reply']
+			receiver=User.objects.get(id=POST['friend_id']),
+			content=POST['reply']
 		).save()
 
 		return JsonResponse({"successful": True})
@@ -61,7 +61,7 @@ def conversation(request):
 		messages = Message.objects.filter(
 			Q(sender=request.user) |
 			Q(receiver=request.user)
-		)
+		).order_by('id')
 
 		people_conversed_with = set([
 			message.contact_number
