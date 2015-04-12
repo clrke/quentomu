@@ -14,12 +14,7 @@ def home(request):
 	messages = Message.objects.all()
 
 	import json
-	r = chk.sendMessage('dude','09161172935','SEND', 'this')
-	global content 
-	content = "I sent a message "+ r.text + " "+ str(r.status_code)
 
-	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
-    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	return render(request, 'home.html',
 		{"topics": topics, "messages": messages.__dict__}
 	)
@@ -27,6 +22,11 @@ def home(request):
 def Remittance(request):
 	pass
 def DelivNotif(request):
+	r = chk.sendMessage('dude','09161172935','SEND', 'this')
+	global content 
+	content = "I sent a message "+ r.text + " "+ str(r.status_code)
+	send_mail('Subject here', content, 'pagong@quentomu.herokuapp.com',
+    ['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
 	r = chk.chkDeliveryOf()
 	global content
 	content = "Delivery notification: "+r.text+" "+ str(r.status_code)
