@@ -24,3 +24,7 @@
 	height: 300px;
 	white-space:nowrap
 }
+
+.no-margin {
+	margin: 0px;
+}

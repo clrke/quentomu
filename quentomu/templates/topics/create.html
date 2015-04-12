@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quentomu - {{ topic.title }}</title>
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'foundation/css/foundation.css'%}">
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'main.css'%}">
+</head>
+<body>
+	<div class="row">
+		<div class="panel white">
+			<h1>{{ topic.title }}</h1>
+			<form method="POST" submit="/topics/{{post.id}}">
+				{% csrf_token %}
+				<input type="text" required
+					name="post" placeholder="Share your quento"/>
+				<button type="submit">Post</button>
+				<a href="/topics/{{topic.id}}"
+					class="button secondary">Cancel</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -17,19 +17,49 @@ angular.module('QuentomuApp', [])
 	})
 }])
 
-.controller('ConversationsCtrl', ['$http', function ($http) {
+.controller('ConversationsCtrl', ['$http', '$interval',
+		function ($http, $interval) {
 	var Conversation = this;
-	$http.get('/conversations').success(function (data) {
-		Conversation.values = data;
-	})
+	var refresh = function () {
+		$http.get('/conversations').success(function (data) {
+			replies = [];
+
+			if(Conversation.values != null)
+				Conversation.values.forEach(function (value) {
+					if(value.reply != '') {
+						replies.push({
+							'friend': value.friend,
+							'reply': value.reply
+						});
+					}
+				});
+
+			Conversation.values = data;
+
+			replies.forEach(function (reply) {
+				Conversation.values.forEach(function (conversation) {
+					if(
+						typeof conversation.friend == "string" ?
+						conversation.friend == reply.friend :
+						conversation.friend.id == reply.friend.id
+					) {
+						console.log(conversation.friend, reply.friend);
+						conversation.reply = reply.reply;
+					}
+				})
+			})
+		});
+	}
+	refresh();
 
 	Conversation.send = function (conversation) {
 		if(conversation.reply == '') return;
 
-		console.log($http.post);
-
 		$http.post('/conversations', {
-			"friend_id": conversation.friend.id,
+			"friend_id":
+				typeof conversation.friend == "string" ?
+					conversation.friend :
+					conversation.friend.id,
 			"reply": conversation.reply
 		});
 
@@ -38,5 +68,9 @@ angular.module('QuentomuApp', [])
 			content: conversation.reply
 		})
 		conversation.reply = '';
+	}
+
+	Conversation.getFriendName = function (friend) {
+		return typeof friend == "string" ? friend : friend.username
 	}
 }]);

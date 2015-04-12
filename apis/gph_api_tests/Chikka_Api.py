@@ -3,14 +3,14 @@ import requests as rq
 clientId = "0b9bdff52c5fbef602a9b2b4cc1f88335e5f08f0fdd745a1e265ca52f14b66e0"
 secretKy = "83b97c2a2423ce38f4b8f94b4f9587702f7cb50b785b2f2670be69fd1a0c86fd"
 shortcode = 292904523
-rqID =  ''
+
 rqCost = 'FREE'
 
 
-def sendMessage(msg,number,msgType,msgID):
+def sendMessage(msg,number,msgType,msgID,rqID):
 	#msgType = "SEND" - > for solo msgs , REPLY for replying to a msg
-	payload = { 'message_type' : msgType , 
-				'mobile_number':number, 
+	payload = { 'message_type' : msgType ,
+				'mobile_number':number,
 				'shortcode':shortcode,
 				'message_id':msgID,
 				'message' :msg,'client_id' : clientId,
@@ -33,7 +33,7 @@ def rcvMessage():
 	timestamp = ''
 	msg =''
 	mobile_number = ''
-	payload = {	
+	payload = {
 				'message_type' : msgType ,
 				'mobile_number' : mobile_number,
 				'message' : msg,
@@ -60,25 +60,30 @@ def rcvMessage():
 
 
 def chkDeliveryOf():
-	
+
 	#todo: timestamping
 	msgType = "outgoing"
-	payload = { 
-				'message_type' : msgType , 
+	msgID = ''
+	number = ''
+	status = ''
+	timestamp = ''
+	credits_cost = ''
+	payload = {
+				'message_type' : msgType ,
 				'shortcode':shortcode,
 				'message_id':msgID,
-				'client_id' : clientId,
-				'secret_key':secretKy
+				'status': status,
+				'timestamp' : timestamp,
+				'credits_cost': credits_cost,
 			}
 	r = rq.post('https://post.chikka.com/smsapi/request',data = payload)
-	print(r.text)
-	print(r.url)
+	data = r
 	if(r):
 		payload = {'Status' : 'Accepted'}
-		print("accepted")
-		r = rq.post('https://post.chikka.com/smsapi/request')
+
+		r = rq.post('https://post.chikka.com/smsapi/request' , data = payload)
 	else:
 		payload = {'Status' : 'Error'}
-		print("Error")
-		r = rq.post('https://post.chikka.com/smsapi/request')
-	return r
+
+		r = rq.post('https://post.chikka.com/smsapi/request' , data = payload)
+	return data
