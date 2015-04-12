@@ -25,14 +25,18 @@ def home(request):
 def Remittance(request):
 	pass
 def DeliveryNotif(request,number,msg):
+	return HttpResponse(deliver())
 
+def deliver(number, msg):
 	hashed =hs.hashme(number)
 	r = chk.sendMessage(msg,number,'SEND', hashed , '')
 	global content
 	content = "I sent a message "+ r.text + " "+ str(r.status_code)
 	send_mail('Sent message by '+str(hashed), content, 'pagong@quentomu.herokuapp.com',
 	['pjinxed.aranzaellej@gmail	.com'], fail_silently=False)
-	return HttpResponse('successful')
+
+	return 'Successful'
+
 def DeliveryNotif_reply(request, number,reqID,msg):
 	r = chk.sendMessage(msg,number,'REPLY', hashed , reqID )
 	global content
@@ -70,6 +74,9 @@ def conversation(request):
 			content=POST['reply'],
 			contact_number=contact_number
 		).save()
+
+		if contact_number != '':
+			deliver(contact_number, POST['reply'])
 
 		return JsonResponse({"successful": True})
 	else:

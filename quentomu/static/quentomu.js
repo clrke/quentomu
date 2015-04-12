@@ -40,7 +40,7 @@ angular.module('QuentomuApp', [])
 				Conversation.values.forEach(function (conversation) {
 					if(
 						typeof conversation.friend == "string" ?
-						conversation.friend == friend :
+						conversation.friend == reply.friend :
 						conversation.friend.id == reply.friend.id
 					) {
 						console.log(conversation.friend, reply.friend);
@@ -51,7 +51,6 @@ angular.module('QuentomuApp', [])
 		});
 	}
 	refresh();
-	$interval(refresh, 5000);
 
 	Conversation.send = function (conversation) {
 		if(conversation.reply == '') return;
