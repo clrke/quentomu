@@ -17,11 +17,41 @@ angular.module('QuentomuApp', [])
 	})
 }])
 
-.controller('ConversationsCtrl', ['$http', function ($http) {
+.controller('ConversationsCtrl', ['$http', '$interval',
+		function ($http, $interval) {
 	var Conversation = this;
-	$http.get('/conversations').success(function (data) {
-		Conversation.values = data;
-	})
+	var refresh = function () {
+		$http.get('/conversations').success(function (data) {
+			replies = [];
+
+			if(Conversation.values != null)
+				Conversation.values.forEach(function (value) {
+					if(value.reply != '') {
+						replies.push({
+							'friend': value.friend,
+							'reply': value.reply
+						});
+					}
+				});
+
+			Conversation.values = data;
+
+			replies.forEach(function (reply) {
+				Conversation.values.forEach(function (conversation) {
+					if(
+						typeof conversation.friend == "string" ?
+						conversation.friend == friend :
+						conversation.friend.id == reply.friend.id
+					) {
+						console.log(conversation.friend, reply.friend);
+						conversation.reply = reply.reply;
+					}
+				})
+			})
+		});
+	}
+	refresh();
+	$interval(refresh, 5000);
 
 	Conversation.send = function (conversation) {
 		if(conversation.reply == '') return;
