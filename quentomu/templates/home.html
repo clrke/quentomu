@@ -19,7 +19,10 @@
 		<a href="/admin/logout"> Log Out </a>
 	</div>
 	<div class="row" ng-controller="TopicsCtrl as Topic">
-		<h1> Stories </h1>
+		<h1>
+			Stories
+			<a href="#" class="button round success small-padding">++</a>
+		</h1>
 		<input type="search" class="searchbox"
 			ng-model="Topic.search" placeholder="Search"/>
 		<div class="small-4 column"
@@ -37,7 +40,10 @@
 	</div>
 	<div class="panel white" ng-controller="ConversationsCtrl as Conversation">
 		<div class="row">
-			<h1>Messages</h1>
+			<h1>
+				Messages
+				<a href="#" class="button round success small-padding">++</a>
+			</h1>
 			<div class="small-4 column"
 				ng-repeat="conversation in Conversation.values">
 				<div class="panel white chatbox">
