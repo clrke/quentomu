@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quentomu - {{ post.title }}</title>
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'foundation/css/foundation.css'%}">
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'main.css'%}">
+</head>
+<body>
+	<div class="row">
+		<div class="panel white">
+			<h1>{{ post.author }}: {{ post.title }}</h1>
+			<form method="POST" submit="/topics/reply/{{post.id}}">
+				{% csrf_token %}
+				<input type="text" required
+					name="reply" placeholder="Reply"/>
+				<button type="submit">Post</button>
+				<a href="/topics/{{post.topic.id}}"
+					class="button secondary">Cancel</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quentomu - {{ topic.title }}</title>
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'foundation/css/foundation.css'%}">
+	<link rel="stylesheet" type="text/css"
+		href="{% static 'main.css'%}">
+</head>
+<body>
+	<div class="row">
+		<div class="panel white no-margin">
+			<h1>
+				{{ topic.title }}
+			</h1>
+			<a href="/topics/{{topic.id}}/create" class="button">
+				Create Post
+			</a>
+			<a href="/" class="button secondary">
+				Back
+			</a>
+		</div>
+		{% for post in original_posts %}
+			{%include "topics/post.html" %}
+		{% endfor %}
+	</div>
+</body>
+</html>

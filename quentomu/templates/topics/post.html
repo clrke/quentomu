@@ -1,0 +1,9 @@
+<div class="panel white no-margin">
+	{{ post.title }} <small>by {{ post.author.username }}</small>
+	 [<a href="/topics/reply/{{ post.id }}">reply</a>]
+	{% for reply in post.replies %}
+		{%with post=reply template_name="topics/post.html" %}
+			{%include template_name%}
+		{%endwith%}
+	{% endfor %}
+</div>

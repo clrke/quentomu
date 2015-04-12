@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.db.models import Q
 from .models import *
@@ -80,17 +80,71 @@ def conversation(request):
 		return JsonResponse(conversations, safe=False);
 
 def topics(request):
-	messages = Message.objects.filter(
-		Q(sender=request.user) |
-		Q(receiver=request.user)
-	)
-	messages = [{
-		'sender': message.sender.username if message.sender else None ,
-		'receiver': message.receiver.username if message.receiver else None,
-		'content': message.content,
-		'contact_number': message.contact_number,
-	} for message in messages]
+	topics = [{
+		"id": topic.id,
+		"title": topic.title,
+		"body": topic.body,
+		"posts_count": topic.post_set.count()
+	} for topic in Topic.objects.all()]
 
-	print(messages)
+	return JsonResponse(topics, safe=False);
 
-	return JsonResponse(messages, safe=False);
+def topics_create(request, id):
+	if request.method == 'POST':
+		topic = Topic.objects.get(id=id)
+
+		Post(
+			title=request.POST['post'],
+			author=request.user,
+			parent=None,
+			topic=topic
+		).save()
+
+		return redirect("/topics/%d"%topic.id)
+	else:
+		topic = Topic.objects.get(id=id)
+		return render(request, 'topics/create.html', {"topic": topic})
+
+
+def get_replies(post):
+	replies = post.post_set.all()
+
+	for reply in replies:
+		reply.replies = get_replies(reply)
+
+	return replies
+
+def topics_show(request, id):
+	topic = Topic.objects.get(id=id)
+	original_posts = topic.post_set.filter(parent=None)
+
+	for post in original_posts:
+		post.replies = get_replies(post)
+
+	return render(request, 'topics/show.html', {
+		"topic": topic,
+		"original_posts": original_posts,
+	})
+
+def get_original_post(post):
+	if post.parent == None:
+		return post
+	else:
+		return get_original_post(post.parent)
+
+def topics_reply(request, id):
+	if request.method == 'POST':
+		post = Post.objects.get(id=id)
+
+		Post(
+			title=request.POST['reply'],
+			author=request.user,
+			parent=post,
+			topic=post.topic
+		).save()
+
+		return redirect("/topics/%d"%post.topic.id)
+	else:
+		post = Post.objects.get(id=id)
+
+		return render(request, 'topics/reply.html', {"post": post})

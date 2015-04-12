@@ -6,6 +6,11 @@ class TopicAdmin(admin.ModelAdmin):
 
 admin.site.register(Topic, TopicAdmin)
 
+class PostAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Post, PostAdmin)
+
 class MessageAdmin(admin.ModelAdmin):
     pass
 

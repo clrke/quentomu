@@ -18,49 +18,15 @@
 	</div>
 	<div class="row" ng-controller="TopicsCtrl as Topic">
 		<h1> Stories </h1>
-		{[ Message.values ]}
-		<div class="small-4 column">
+		<div class="small-4 column" ng-repeat="topic in Topic.values">
 			<div class="panel white">
-				<h4> Computer Science </h4>
-				<b> arkeidolon: </b> today I went to the hackathon...
-				<a href="#"> Read More </a>
-			</div>
-		</div>
-		<div class="small-4 column">
-			<div class="panel white">
-				<h4> Web Development </h4>
-				<b> doy: </b> hello world
-				<a href="#"> Read More </a>
-			</div>
-		</div>
-		<div class="small-4 column">
-			<div class="panel white">
-				<h4> Web Development </h4>
-				<b> doy: </b> hello world
-				<a href="#"> Read More </a>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="small-4 column">
-			<div class="panel white">
-				<h4> Web Development </h4>
-				<b> doy: </b> hello world
-				<a href="#"> Read More </a>
-			</div>
-		</div>
-		<div class="small-4 column">
-			<div class="panel white">
-				<h4> Web Development </h4>
-				<b> doy: </b> hello world
-				<a href="#"> Read More </a>
-			</div>
-		</div>
-		<div class="small-4 column">
-			<div class="panel white">
-				<h4> Web Development </h4>
-				<b> doy: </b> hello world
-				<a href="#"> Read More </a>
+				<h4>
+					<a href="/topics/{[ topic.id ]}">
+						{[ topic.title ]}
+					</a>
+				</h4>
+				<p> {[ topic.body ]} </p>
+				<small> {[ topic.posts_count ]} posts</small>
 			</div>
 		</div>
 	</div>

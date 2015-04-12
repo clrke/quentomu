@@ -6,6 +6,14 @@ urlpatterns = [
     url(r'^$', 'quentomu.views.home', name='home'),
     url(r'^conversations$', 'quentomu.views.conversation', name='conversation'),
     url(r'^topics$', 'quentomu.views.topics', name='topics'),
+
+    url(r'^topics/(?P<id>\d+)$', 'quentomu.views.topics_show',
+    	name='topics_show'),
+    url(r'^topics/(?P<id>\d+)/create$', 'quentomu.views.topics_create',
+    	name='topics_create'),
+    url(r'^topics/reply/(?P<id>\d+)$', 'quentomu.views.topics_reply',
+    	name='topics_reply'),
+
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
