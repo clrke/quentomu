@@ -41,3 +41,9 @@ body {
 .small-padding {
 	padding: 10px;
 }
+
+.caption {
+	font-size: 40px;
+	color: white;
+	font-weight: bolder;
+}
