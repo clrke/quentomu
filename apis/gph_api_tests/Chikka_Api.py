@@ -6,7 +6,6 @@ shortcode = 292904523
 
 rqCost = 'FREE'
 
-
 def sendMessage(msg,number,msgType,msgID,rqID):
 	#msgType = "SEND" - > for solo msgs , REPLY for replying to a msg
 	payload = { 'message_type' : msgType ,
@@ -24,7 +23,6 @@ def sendMessage(msg,number,msgType,msgID,rqID):
 	print(r.status_code)
 	print(r.text)
 	return r
-
 
 #both requires urls
 def rcvMessage():
@@ -56,8 +54,6 @@ def rcvMessage():
 		print("Error")
 		r = rq.post('https://post.chikka.com/smsapi/request')
 	return r
-
-
 
 def chkDeliveryOf():
 
